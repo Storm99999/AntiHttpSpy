@@ -63,6 +63,18 @@ oldNamecall = hookmetamethod(game, '__namecall', newcclosure(function(self, ...)
         return task.wait(9e9)
     end
 
+    if(string.lower(method) == 'print') then
+        return
+    end
+
+    if(string.lower(method) == 'warn') then
+        return
+    end
+
+    if(string.lower(method) == 'error') then
+        return
+    end
+
     if(string.lower(method) == 'rendernametag') then
         return 
     end

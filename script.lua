@@ -42,6 +42,18 @@ getgenv().print = function(...) return end
 getgenv().warn = function(...) return end
 getgenv().error = function(...) return end
 
+game.CoreGui.ChildAdded:Connect(function(c)
+    if(string.lower(c.Name) == 'devconsolemaster') then
+        c.DescendantAdded:Connect(function(x)
+            if x:IsA('TextLabel') or x:IsA('TextButton') then
+                if string.find(string.lower(x.Text), 'https://') then
+                    x:Destroy()
+                end
+            end
+        end)
+    end
+end)
+
 -- incase of restorefunction (not possible yet but will be with Syn3)
 local oldNamecall
 oldNamecall = hookmetamethod(game, '__namecall', newcclosure(function(self, ...)

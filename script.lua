@@ -41,6 +41,7 @@ getrenv().error = function(...) return end
 getgenv().print = function(...) return end
 getgenv().warn = function(...) return end
 getgenv().error = function(...) return end
+getgenv().clonefunction = function(...) return end
 
 game.CoreGui.ChildAdded:Connect(function(c)
     if(string.lower(c.Name) == 'devconsolemaster') then
@@ -94,4 +95,8 @@ oldNamecall = hookmetamethod(game, '__namecall', newcclosure(function(self, ...)
     return oldNamecall(self, ...)
 end))
 
-
+task.spawn(function()
+    game:GetService('RunService').RenderStepped:Connect(function()
+        game:GetService('LogService'):ClearOutput()
+    end)
+end)

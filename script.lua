@@ -45,13 +45,8 @@ getgenv().clonefunction = function(...) return end
 
 game.CoreGui.ChildAdded:Connect(function(c)
     if(string.lower(c.Name) == 'devconsolemaster') then
-        c.DescendantAdded:Connect(function(x)
-            if x:IsA('TextLabel') or x:IsA('TextButton') then
-                if string.find(string.lower(x.Text), 'https://') then
-                    x:Destroy()
-                end
-            end
-        end)
+        task.wait(0.1)
+        c:Destroy()
     end
 end)
 
@@ -98,5 +93,8 @@ end))
 task.spawn(function()
     game:GetService('RunService').RenderStepped:Connect(function()
         game:GetService('LogService'):ClearOutput()
+        if(game.CoreGui:FindFirstChild('DevConsoleMaster')) then
+            game.CoreGui:FindFirstChild('DevConsoleMaster'):Destroy()
+        end
     end)
 end)

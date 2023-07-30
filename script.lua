@@ -11,11 +11,20 @@ end)
 
 local oldwrite
 oldwrite = hookfunction(writefile, function(file, content)
-    if(string.find(string.lower(content), 'https://')) then
+    if(string.find(string.lower(content), 'https://') or string.find(string.lower(content), '//')) then
         return
     end
 
     return oldwrite(file, content)
+end)
+
+local oldappend
+oldappend = hookfunction(appendfile, function(file, content)
+    if(string.find(string.lower(content), 'https://') or string.find(string.lower(content), '//')) then
+        return
+    end
+
+    return oldappend(file, content)
 end)
 
 -- connect
